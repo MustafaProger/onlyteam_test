@@ -12,6 +12,7 @@ const Circle = styled.div`
 	height: 530px;
 	border-radius: 50%;
 	border: 1px solid #d9d9d9;
+	transition: all 0.5s cubic-bezier(0.4, 0, 1, 1);;
 `;
 
 const Dot = styled.div`
@@ -80,6 +81,9 @@ const TimelineCircle = ({
 }: WorkWithDots) => {
 	const radius = 265;
 
+	const stepAngle = 360 / countDots;
+	const rotation = -activeDot * stepAngle;
+
 	const dots = useMemo(() => {
 		return Array.from({ length: countDots }).map((_, i) => {
 			const angleDeg = (360 / countDots) * i;
@@ -92,14 +96,15 @@ const TimelineCircle = ({
 	}, [countDots]);
 
 	return (
-		<Circle>
+		<Circle
+			style={{ transform: `translate(-50%, -50%) rotate(${rotation}deg)` }}>
 			{dots.map((dot, i) => (
 				<Dot
 					key={i}
 					data-index={dot.index}
 					style={{ left: `${dot.x}px`, top: `${dot.y}px` }}
 					className={activeDot === dot.index ? "active" : ""}
-					onClick={() => setActiveDot(i)}
+					onClick={() => setActiveDot(dot.index)}
 				/>
 			))}
 		</Circle>

@@ -1,8 +1,9 @@
 import { createStore } from "redux";
+import { AppState, AppAction } from "../interfaces/interfaces";
 
-const initialStore = { countDots: 6, activeDot: 5 };
+const initialStore: AppState = { countDots: 6, activeDot: 6 };
 
-function reducer(store = initialStore, action: any) {
+function reducer(store: AppState = initialStore, action: AppAction): AppState {
 	switch (action.type) {
 		case "SET_ACTIVE_DOT":
 			return { ...store, activeDot: action.payload };
