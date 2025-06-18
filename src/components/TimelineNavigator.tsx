@@ -1,5 +1,5 @@
 import React from "react";
-import { AppState, WorkWithDots } from "../interfaces/interfaces";
+import { AppState, NavigatorProps } from "../interfaces/interfaces";
 import { connect } from "react-redux";
 import styled from "styled-components";
 
@@ -52,7 +52,6 @@ const NavigatorContainer = styled.div`
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		transform: translate(-50%, -50%);
 	}
 
 	.navigator-left span {
@@ -67,18 +66,23 @@ const NavigatorContainer = styled.div`
 const TimelineNavigator = ({
 	countDots,
 	activeDot,
-}: Pick<WorkWithDots, "countDots" | "activeDot">) => {
-	console.log(countDots, activeDot);
+	goToPreviousDot,
+	goToNextDot,
+}: NavigatorProps) => {
 	return (
 		<TimelineNavigatorContainer>
 			<p style={{ color: "#42567A", fontSize: "14px" }}>
 				0{activeDot}/0{countDots}
 			</p>
 			<NavigatorContainer>
-				<div className='navigator navigator-left'>
+				<div
+					className='navigator navigator-left'
+					onClick={() => goToPreviousDot(activeDot)}>
 					<span></span>
 				</div>
-				<div className='navigator navigator-right'>
+				<div
+					className='navigator navigator-right'
+					onClick={() => goToNextDot(activeDot)}>
 					<span></span>
 				</div>
 			</NavigatorContainer>
@@ -88,8 +92,19 @@ const TimelineNavigator = ({
 
 function mapStateToProps(
 	state: AppState
-): Pick<WorkWithDots, "countDots" | "activeDot"> {
+): Pick<NavigatorProps, "activeDot" | "countDots"> {
 	return { countDots: state.countDots, activeDot: state.activeDot };
 }
 
-export default connect(mapStateToProps)(TimelineNavigator);
+function mapDispatchToProps(
+	dispatch: any
+): Pick<NavigatorProps, "goToNextDot" | "goToPreviousDot"> {
+	return {
+		goToPreviousDot: (index) =>
+			dispatch({ type: "GO_TO_PREVIOUS_DOT", payload: index }),
+		goToNextDot: (index) =>
+			dispatch({ type: "GO_TO_NEXT_DOT", payload: index }),
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TimelineNavigator);

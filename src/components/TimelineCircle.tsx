@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-import { AppState, WorkWithDots } from "../interfaces/interfaces";
+import { AppState, DotsProps } from "../interfaces/interfaces";
 import styled from "styled-components";
 
 const Circle = styled.div`
@@ -75,11 +75,7 @@ const Dot = styled.div`
 	}
 `;
 
-const TimelineCircle = ({
-	countDots,
-	activeDot,
-	setActiveDot,
-}: WorkWithDots) => {
+const TimelineCircle = ({ countDots, activeDot, setActiveDot }: DotsProps) => {
 	const radius = 265;
 
 	const stepAngle = 360 / countDots;
@@ -120,15 +116,15 @@ const TimelineCircle = ({
 	);
 };
 
-function mapStatetoProps(state: AppState): AppState {
+function mapStateToProps(state: AppState): AppState {
 	return { countDots: state.countDots, activeDot: state.activeDot };
 }
 
-function mapDispatchToProps(dispatch: any): Pick<WorkWithDots, "setActiveDot"> {
+function mapDispatchToProps(dispatch: any): Pick<DotsProps, "setActiveDot"> {
 	return {
 		setActiveDot: (index) =>
 			dispatch({ type: "SET_ACTIVE_DOT", payload: index }),
 	};
 }
 
-export default connect(mapStatetoProps, mapDispatchToProps)(TimelineCircle);
+export default connect(mapStateToProps, mapDispatchToProps)(TimelineCircle);
