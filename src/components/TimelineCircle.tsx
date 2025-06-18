@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { CountDots } from "../interfaces/interfaces";
 import styled from "styled-components";
 
-
 const Circle = styled.div`
 	position: absolute;
 	top: 50%;
@@ -16,27 +15,49 @@ const Circle = styled.div`
 `;
 
 const Dot = styled.div`
-	width: 8px;
-	height: 8px;
+	width: 56px;
+	height: 56px;
 	border-radius: 50%;
-	background: rgba(66, 86, 122, 1);
+	background: transparent;
 	position: absolute;
 	transform: translate(-50%, -50%);
 	cursor: pointer;
+	transition: all 0.3s;
+
+	&::after,
+	&::before {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transition: 0.3s;
+		z-index: 1;
+	}
 
 	&::after {
+		content: "";
+		width: 6px;
+		height: 6px;
+		border-radius: 50%;
+		background: rgba(66, 86, 122, 1);
+	}
+
+	&::before {
 		content: attr(data-index);
-		position: absolute;
-		top: -24px;
-		left: 50%;
-		transform: translateX(-50%);
+		font-size: 20px;
+		color: rgba(66, 86, 122, 1);
 		opacity: 0;
-		transition: 0.3s;
-		color: #000;
-		font-size: 14px;
+		z-index: 4;
 	}
 
 	&:hover::after {
+		width: 56px;
+		height: 56px;
+		background-color: #f4f5f9;
+		border: 1px solid rgba(48, 62, 88, 0.5);
+	}
+
+	&:hover::before {
 		opacity: 1;
 	}
 `;
