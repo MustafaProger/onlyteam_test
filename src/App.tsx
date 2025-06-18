@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import TimelineContainer from "./components/TimelineContainer";
 import TimelineCircle from "./components/TimelineCircle";
+import TimelineNavigator from "./components/TimelineNavigator";
 
 const AppContainer = styled.div`
 	width: 100%;
@@ -43,7 +44,8 @@ const App = () => {
 						даты
 					</Title>
 				</TitleWrapper>
-				<TimelineCircle/>
+				<TimelineCircle />
+				<TimelineNavigator />
 			</TimelineContainer>
 		</AppContainer>
 	);

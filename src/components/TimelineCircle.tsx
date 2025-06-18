@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-import { WorkWithDots } from "../interfaces/interfaces";
+import { AppState, WorkWithDots } from "../interfaces/interfaces";
 import styled from "styled-components";
 
 const Circle = styled.div`
@@ -13,6 +13,7 @@ const Circle = styled.div`
 	border-radius: 50%;
 	border: 1px solid #d9d9d9;
 	transition: all 0.5s;
+	z-index: 3;
 `;
 
 const Dot = styled.div`
@@ -48,7 +49,7 @@ const Dot = styled.div`
 		font-size: 20px;
 		color: rgba(66, 86, 122, 1);
 		opacity: 0;
-		z-index: 4;
+		z-index: 2;
 	}
 
 	&:hover::after {
@@ -107,7 +108,9 @@ const TimelineCircle = ({
 					style={{
 						left: `${dot.x}px`,
 						top: `${dot.y}px`,
-						transform: `translate(-50%, -50%) rotate(${-(360 + rotationCircle)}deg)`,
+						transform: `translate(-50%, -50%) rotate(${-(
+							360 + rotationCircle
+						)}deg)`,
 					}}
 					className={activeDot === dot.index ? "active" : ""}
 					onClick={() => setActiveDot(dot.index)}
@@ -117,9 +120,7 @@ const TimelineCircle = ({
 	);
 };
 
-function mapStatetoProps(
-	state: any
-): Pick<WorkWithDots, "countDots" | "activeDot"> {
+function mapStatetoProps(state: AppState): AppState {
 	return { countDots: state.countDots, activeDot: state.activeDot };
 }
 
