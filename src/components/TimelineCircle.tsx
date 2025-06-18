@@ -12,7 +12,7 @@ const Circle = styled.div`
 	height: 530px;
 	border-radius: 50%;
 	border: 1px solid #d9d9d9;
-	transition: all 0.5s cubic-bezier(0.4, 0, 1, 1);;
+	transition: all 0.5s;
 `;
 
 const Dot = styled.div`
@@ -23,7 +23,7 @@ const Dot = styled.div`
 	position: absolute;
 	transform: translate(-50%, -50%);
 	cursor: pointer;
-	transition: all 0.3s;
+	transition: all 0.5s;
 
 	&::after,
 	&::before {
@@ -31,7 +31,7 @@ const Dot = styled.div`
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		transition: 0.3s;
+		transition: all 0.5s;
 		z-index: 1;
 	}
 
@@ -82,7 +82,7 @@ const TimelineCircle = ({
 	const radius = 265;
 
 	const stepAngle = 360 / countDots;
-	const rotation = -activeDot * stepAngle;
+	const rotationCircle = -activeDot * stepAngle;
 
 	const dots = useMemo(() => {
 		return Array.from({ length: countDots }).map((_, i) => {
@@ -97,12 +97,18 @@ const TimelineCircle = ({
 
 	return (
 		<Circle
-			style={{ transform: `translate(-50%, -50%) rotate(${rotation}deg)` }}>
+			style={{
+				transform: `translate(-50%, -50%) rotate(${rotationCircle}deg)`,
+			}}>
 			{dots.map((dot, i) => (
 				<Dot
 					key={i}
 					data-index={dot.index}
-					style={{ left: `${dot.x}px`, top: `${dot.y}px` }}
+					style={{
+						left: `${dot.x}px`,
+						top: `${dot.y}px`,
+						transform: `translate(-50%, -50%) rotate(${-(360 + rotationCircle)}deg)`,
+					}}
 					className={activeDot === dot.index ? "active" : ""}
 					onClick={() => setActiveDot(dot.index)}
 				/>
