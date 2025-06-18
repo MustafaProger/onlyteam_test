@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-import { CountDots } from "../interfaces/interfaces";
+import { WorkWithDots } from "../interfaces/interfaces";
 import styled from "styled-components";
 
 const Circle = styled.div`
@@ -60,9 +60,24 @@ const Dot = styled.div`
 	&:hover::before {
 		opacity: 1;
 	}
+
+	&.active::before {
+		opacity: 1;
+	}
+
+	&.active::after {
+		width: 56px;
+		height: 56px;
+		background-color: #f4f5f9;
+		border: 1px solid rgba(48, 62, 88, 0.5);
+	}
 `;
 
-const TimelineCircle = ({ countDots }: CountDots) => {
+const TimelineCircle = ({
+	countDots,
+	activeDot,
+	setActiveDot,
+}: WorkWithDots) => {
 	const radius = 265;
 
 	const dots = useMemo(() => {
@@ -83,14 +98,25 @@ const TimelineCircle = ({ countDots }: CountDots) => {
 					key={i}
 					data-index={dot.index}
 					style={{ left: `${dot.x}px`, top: `${dot.y}px` }}
+					className={activeDot === dot.index ? "active" : ""}
+					onClick={() => setActiveDot(i)}
 				/>
 			))}
 		</Circle>
 	);
 };
 
-function mapStatetoProps(state: any): CountDots {
-	return { countDots: state.countDots };
+function mapStatetoProps(
+	state: any
+): Pick<WorkWithDots, "countDots" | "activeDot"> {
+	return { countDots: state.countDots, activeDot: state.activeDot };
 }
 
-export default connect(mapStatetoProps)(TimelineCircle);
+function mapDispatchToProps(dispatch: any): Pick<WorkWithDots, "setActiveDot"> {
+	return {
+		setActiveDot: (index) =>
+			dispatch({ type: "SET_ACTIVE_DOT", payload: index }),
+	};
+}
+
+export default connect(mapStatetoProps, mapDispatchToProps)(TimelineCircle);
