@@ -39,6 +39,7 @@ const Container = styled.div`
 
 const TimelineContainer = ({ children }: PropsWithChildren<{}>) => {
 	return <Container>{children}</Container>;
+
 };
 
 export default TimelineContainer;
