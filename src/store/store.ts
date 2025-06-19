@@ -1,7 +1,7 @@
 import { createStore } from "redux";
 import { AppState, AppAction } from "../interfaces/interfaces";
 
-const initialStore: AppState = { countDots: 6, activeDot: 6 };
+const initialStore: AppState = { countDots: 6, activeDot: 6, events: [] };
 
 function reducer(store: AppState = initialStore, action: AppAction): AppState {
 	switch (action.type) {
@@ -17,6 +17,8 @@ function reducer(store: AppState = initialStore, action: AppAction): AppState {
 				...store,
 				activeDot: store.activeDot < store.countDots ? store.activeDot + 1 : 1,
 			};
+		case "PUSH_EVENTS":
+			return { ...store, events: action.payload };
 		default:
 			return store;
 	}

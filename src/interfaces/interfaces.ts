@@ -11,10 +11,31 @@ export interface NavigatorProps {
 	goToNextDot: (index: number) => void;
 }
 
+export interface EventsProps {
+	activeDot: number;
+	events: Event[];
+	pushEventsToState: (events: Event[]) => void;
+}
+
 // Store типизация
+
+export interface EventItem {
+	year: number;
+	description: string;
+}
+
+export interface Event {
+	index: number;
+	category: string;
+	startYear: number;
+	endYear: number;
+	events: EventItem[];
+}
+
 export interface AppState {
 	countDots: number;
 	activeDot: number;
+	events: Event[];
 }
 
 export interface SetActiveDotAction {
@@ -32,4 +53,13 @@ export interface GoToPreviousDot {
 	payload: number;
 }
 
-export type AppAction = SetActiveDotAction | GoToNextDot | GoToPreviousDot;
+export interface PushEvents {
+	type: "PUSH_EVENTS";
+	payload: Event[];
+}
+
+export type AppAction =
+	| SetActiveDotAction
+	| GoToNextDot
+	| GoToPreviousDot
+	| PushEvents;

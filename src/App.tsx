@@ -4,6 +4,7 @@ import TimelineContainer from "./components/TimelineContainer";
 import TimelineCircle from "./components/TimelineCircle";
 import TimelineNavigator from "./components/TimelineNavigator";
 import TimelineTitle from "./components/TimelineTitle";
+import TimelineEvents from "./components/TimelineEvents";
 
 const AppContainer = styled.div`
 	width: 100%;
@@ -19,6 +20,7 @@ const App = () => {
 				<TimelineTitle />
 				<TimelineCircle />
 				<TimelineNavigator />
+				<TimelineEvents />
 			</TimelineContainer>
 		</AppContainer>
 	);

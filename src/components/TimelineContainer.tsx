@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PropsWithChildren } from "react";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -37,7 +37,7 @@ const Container = styled.div`
 	}
 `;
 
-const TimelineContainer = ({ children }: any) => {
+const TimelineContainer = ({ children }: PropsWithChildren<{}>) => {
 	return <Container>{children}</Container>;
 };
 

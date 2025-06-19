@@ -1,7 +1,8 @@
 import React from "react";
-import { AppState, NavigatorProps } from "../interfaces/interfaces";
+import { AppAction, AppState, NavigatorProps } from "../interfaces/interfaces";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { Dispatch } from "redux";
 
 const TimelineNavigatorContainer = styled.div`
 	display: flex;
@@ -97,7 +98,7 @@ function mapStateToProps(
 }
 
 function mapDispatchToProps(
-	dispatch: any
+	dispatch: Dispatch<AppAction>
 ): Pick<NavigatorProps, "goToNextDot" | "goToPreviousDot"> {
 	return {
 		goToPreviousDot: (index) =>

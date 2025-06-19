@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import { connect } from "react-redux";
-import { AppState, DotsProps } from "../interfaces/interfaces";
+import { AppAction, AppState, DotsProps } from "../interfaces/interfaces";
 import styled from "styled-components";
+import { Dispatch } from "redux";
 
 const Circle = styled.div`
 	position: absolute;
@@ -116,11 +117,15 @@ const TimelineCircle = ({ countDots, activeDot, setActiveDot }: DotsProps) => {
 	);
 };
 
-function mapStateToProps(state: AppState): AppState {
+function mapStateToProps(
+	state: AppState
+): Pick<DotsProps, "activeDot" | "countDots"> {
 	return { countDots: state.countDots, activeDot: state.activeDot };
 }
 
-function mapDispatchToProps(dispatch: any): Pick<DotsProps, "setActiveDot"> {
+function mapDispatchToProps(
+	dispatch: Dispatch<AppAction>
+): Pick<DotsProps, "setActiveDot"> {
 	return {
 		setActiveDot: (index) =>
 			dispatch({ type: "SET_ACTIVE_DOT", payload: index }),
