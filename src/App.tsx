@@ -3,6 +3,7 @@ import styled from "styled-components";
 import TimelineContainer from "./components/TimelineContainer";
 import TimelineCircle from "./components/TimelineCircle";
 import TimelineNavigator from "./components/TimelineNavigator";
+import TimelineTitle from "./components/TimelineTitle";
 
 const AppContainer = styled.div`
 	width: 100%;
@@ -11,39 +12,11 @@ const AppContainer = styled.div`
 	background: #f4f5f9;
 `;
 
-const TitleWrapper = styled.div`
-	display: flex;
-	align-items: center;
-	padding-top: 170px;
-`;
-
-const Line = styled.div`
-	width: 5px;
-	height: 120px;
-	margin-right: 78px;
-	background: linear-gradient(to bottom, #3877ee, #ef5da8);
-`;
-
-const Title = styled.h1`
-	font-size: 56px;
-	font-weight: bold;
-	line-height: 120%;
-	color: rgba(66, 86, 122, 1);
-	margin: 0;
-`;
-
 const App = () => {
 	return (
 		<AppContainer>
 			<TimelineContainer>
-				<TitleWrapper>
-					<Line />
-					<Title>
-						Исторические
-						<br />
-						даты
-					</Title>
-				</TitleWrapper>
+				<TimelineTitle />
 				<TimelineCircle />
 				<TimelineNavigator />
 			</TimelineContainer>

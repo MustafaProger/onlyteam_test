@@ -12,7 +12,7 @@ const Circle = styled.div`
 	height: 530px;
 	border-radius: 50%;
 	border: 1px solid #d9d9d9;
-	transition: all 0.5s;
+	transition: all 1s;
 	z-index: 3;
 `;
 
@@ -24,7 +24,7 @@ const Dot = styled.div`
 	position: absolute;
 	transform: translate(-50%, -50%);
 	cursor: pointer;
-	transition: all 0.5s;
+	transition: all 1s;
 
 	&::after,
 	&::before {
