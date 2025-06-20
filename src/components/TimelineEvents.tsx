@@ -24,13 +24,13 @@ const EventContainer = styled.div`
 	gap: 15px;
 `;
 
-const EventYear = styled.h2`
+const EventYear = styled.h4`
 	line-height: 120%;
 	font-size: 25px;
 	color: rgba(56, 119, 238, 1);
 `;
 
-const EventDescr = styled.h3`
+const EventDescr = styled.p`
 	line-height: 30px;
 	font-size: 20px;
 	color: rgba(66, 86, 122, 1);
