@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { connect } from "react-redux";
 import { AppAction, AppState, DotsProps } from "../interfaces/interfaces";
 import styled from "styled-components";
@@ -76,7 +76,38 @@ const Dot = styled.div`
 	}
 `;
 
-const TimelineCircle = ({ countDots, activeDot, setActiveDot }: DotsProps) => {
+const Category = styled.p<{ $visible: boolean }>`
+	position: absolute;
+	top: 50%;
+	left: 75px;
+	transform: translateY(-50%);
+	font-size: 20px;
+	font-weight: bold;
+	color: rgba(66, 86, 122, 1);
+	transition: all 0.3s;
+	opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+`;
+
+const TimelineCircle = ({
+	countDots,
+	activeDot,
+	events,
+	setActiveDot,
+}: DotsProps) => {
+	const [visible, setVisible] = useState(false);
+	const [localDot, setLocalDot] = useState(activeDot);
+
+	useEffect(() => {
+		setVisible(false);
+
+		const timer = setTimeout(() => {
+			setVisible(true);
+			setLocalDot(activeDot);
+		}, 1000);
+
+		return () => clearTimeout(timer);
+	}, [activeDot]);
+
 	const radius = 265;
 
 	const stepAngle = 360 / countDots;
@@ -92,6 +123,12 @@ const TimelineCircle = ({ countDots, activeDot, setActiveDot }: DotsProps) => {
 			return { x, y, index: i + 1 };
 		});
 	}, [countDots]);
+
+	let category: string = "";
+
+	if (events && events[localDot - 1]) {
+		category = events[localDot - 1].category;
+	}
 
 	return (
 		<Circle
@@ -110,8 +147,11 @@ const TimelineCircle = ({ countDots, activeDot, setActiveDot }: DotsProps) => {
 						)}deg)`,
 					}}
 					className={activeDot === dot.index ? "active" : ""}
-					onClick={() => setActiveDot(dot.index)}
-				/>
+					onClick={() => setActiveDot(dot.index)}>
+					<Category $visible={visible}>
+						{localDot === dot.index ? category : null}
+					</Category>
+				</Dot>
 			))}
 		</Circle>
 	);
@@ -119,8 +159,12 @@ const TimelineCircle = ({ countDots, activeDot, setActiveDot }: DotsProps) => {
 
 function mapStateToProps(
 	state: AppState
-): Pick<DotsProps, "activeDot" | "countDots"> {
-	return { countDots: state.countDots, activeDot: state.activeDot };
+): Pick<DotsProps, "activeDot" | "countDots" | "events"> {
+	return {
+		countDots: state.countDots,
+		activeDot: state.activeDot,
+		events: state.events,
+	};
 }
 
 function mapDispatchToProps(

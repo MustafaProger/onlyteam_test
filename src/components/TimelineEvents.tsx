@@ -36,9 +36,9 @@ const EventDescr = styled.h3`
 	color: rgba(66, 86, 122, 1);
 `;
 
-const FadeWrapper = styled.div<{ visible: boolean }>`
-	opacity: ${({ visible }) => (visible ? 1 : 0)};
-	transform: translateY(${({ visible }) => (visible ? "0" : "5px")});
+const FadeWrapper = styled.div<{ $visible: boolean }>`
+	opacity: ${({ $visible }) => ($visible ? 1 : 0)};
+	transform: translateY(${({ $visible }) => ($visible ? "0" : "5px")});
 	transition: all 0.4s ease;
 `;
 
@@ -94,11 +94,12 @@ const TimelineEvents = ({
 
 	return (
 		<EventsContainer>
-			<div
-				className='custom-swiper-wrapper'
-				style={{ position: "relative" }}>
-				<div className='custom-swiper-prev'></div>
-				<FadeWrapper visible={visible}>
+			<FadeWrapper $visible={visible}>
+				<div
+					className='custom-swiper-wrapper'
+					style={{ position: "relative" }}>
+					<div className='custom-swiper-prev'></div>
+
 					<Swiper
 						slidesPerView={3.5}
 						spaceBetween={80}
@@ -110,9 +111,9 @@ const TimelineEvents = ({
 						className='mySwiper'>
 						{eventVerstka}
 					</Swiper>
-				</FadeWrapper>
-				<div className='custom-swiper-next'></div>
-			</div>
+					<div className='custom-swiper-next'></div>
+				</div>
+			</FadeWrapper>
 		</EventsContainer>
 	);
 };

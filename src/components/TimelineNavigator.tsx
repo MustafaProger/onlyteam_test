@@ -34,6 +34,10 @@ const NavigatorContainer = styled.div`
 		transition: all 0.5s;
 	}
 
+	.navigator:hover {
+		background-color: white;
+	}
+
 	.navigator span {
 		position: relative;
 		display: block;

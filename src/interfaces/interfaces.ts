@@ -1,6 +1,7 @@
 export interface DotsProps {
 	countDots: number;
 	activeDot: number;
+	events: Event[];
 	setActiveDot: (index: number) => void;
 }
 
