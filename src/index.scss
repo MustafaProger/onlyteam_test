@@ -61,9 +61,6 @@
 @media (max-width: 1440px) {
 	.sc-bRKDuR.container {
 		min-height: 700px;
-		&::before {
-			top: 45%;
-		}
 	}
 
 	.kgISHx.title__container {
@@ -83,10 +80,6 @@
 		height: 400px;
 	}
 
-	.fusBLo.years__container {
-		top: 45%;
-	}
-
 	.jYWhnb.years__item {
 		font-size: 140px;
 	}
@@ -97,5 +90,34 @@
 
 	.iQRfrY.events__container {
 		top: 47%;
+	}
+}
+
+@media (max-width: 1024px) {
+	.sc-bRKDuR.container {
+		&::before {
+			top: 40%;
+		}
+	}
+
+	.kgISHx.title__container {
+		.title__line {
+			height: 100px;
+			margin-right: 50px;
+		}
+	}
+
+	.eSSKxn.circle {
+		width: 350px;
+		height: 350px;
+		top: 40%;
+	}
+
+	.bRCLpk.years__container {
+		top: 40%;
+	}
+
+	.jYWhnb.years__item {
+		font-size: 119px;
 	}
 }

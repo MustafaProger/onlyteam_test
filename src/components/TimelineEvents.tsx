@@ -118,11 +118,13 @@ const TimelineEvents = ({
 								slidesPerView: 2.5,
 								spaceBetween: 50,
 							},
-							640: {
+							768: {
 								slidesPerView: 2,
+								spaceBetween: 25,
 							},
 							420: {
 								slidesPerView: 1.5,
+								spaceBetween: 25,
 							},
 						}}
 						modules={[Navigation]}
