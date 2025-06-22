@@ -6,7 +6,7 @@ import { Dispatch } from "redux";
 
 const Circle = styled.div`
 	position: absolute;
-	top: 50%;
+	top: 45%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 530px;
@@ -30,7 +30,7 @@ const Dot = styled.div`
 	&::after,
 	&::before {
 		position: absolute;
-		top: 50%;
+		top: 45%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		transition: all 0.5s;

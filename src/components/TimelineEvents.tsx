@@ -15,7 +15,10 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 
 const EventsContainer = styled.div`
-	margin: 56px 80px 40px 80px;
+	margin: 0px 160px 0px 0px;
+	position: relative;
+	top: 42%;
+	left: 80px;
 `;
 
 const EventContainer = styled.div`

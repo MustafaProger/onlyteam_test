@@ -9,10 +9,12 @@ import TimelineYears from "./components/TimelineYears";
 
 const AppContainer = styled.div`
 	width: 100%;
-	height: 100%;
+	height: 100vh;
 	display: flex;
 	justify-content: center;
 	background: #f4f5f9;
+	overflow-y: auto;
+	padding: 0 10px;
 `;
 
 const App = () => {

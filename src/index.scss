@@ -7,6 +7,10 @@
 	font-style: normal;
 }
 
+.swiper-wrapper {
+	margin-bottom: 30px;
+}
+
 .custom-swiper-prev,
 .custom-swiper-next {
 	position: absolute;
@@ -56,7 +60,7 @@
 
 @media (max-width: 1440px) {
 	.sc-bRKDuR.container {
-		min-height: 0px;
+		min-height: 700px;
 		&::before {
 			top: 45%;
 		}
@@ -74,10 +78,9 @@
 		}
 	}
 
-	.iQehQL.circle {
+	.eSSKxn.circle {
 		width: 400px;
 		height: 400px;
-		top: 45%;
 	}
 
 	.fusBLo.years__container {
@@ -88,7 +91,11 @@
 		font-size: 140px;
 	}
 
-	.lkwwrU.navigator__container {
-		margin-top: 300px;
+	.bOakSB.navigator__container {
+		top: 40%;
+	}
+
+	.iQRfrY.events__container {
+		top: 47%;
 	}
 }

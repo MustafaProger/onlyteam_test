@@ -8,7 +8,9 @@ const TimelineNavigatorContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	margin: 393px 0 0 80px;
+	position: relative;
+	top: 36.5%;
+	left: 80px;
 `;
 
 const NavigatorContainer = styled.div`
