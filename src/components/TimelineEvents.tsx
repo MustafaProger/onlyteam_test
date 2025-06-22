@@ -67,6 +67,10 @@ const Category = styled.p`
 	font-weight: bold;
 	color: rgba(66, 86, 122, 1);
 	transition: all 0.3s;
+	display: none;
+	@media (max-width: 768px) {
+		display: block;
+	}
 `;
 
 const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
