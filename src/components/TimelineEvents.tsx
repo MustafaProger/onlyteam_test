@@ -12,7 +12,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Navigation } from "swiper/modules";
+import { Navigation, Pagination } from "swiper/modules";
 
 const EventsContainer = styled.div`
 	margin: 0px 160px 0px 0px;
@@ -55,12 +55,10 @@ const TimelineEvents = ({
 
 	useEffect(() => {
 		setVisible(false);
-
 		const timer = setTimeout(() => {
 			setLocalDot(activeDot);
 			setVisible(true);
 		}, 1000);
-
 		return () => clearTimeout(timer);
 	}, [activeDot]);
 
@@ -80,20 +78,16 @@ const TimelineEvents = ({
 	}, [pushEventsToState]);
 
 	const currentEvent = events[localDot - 1];
-	let eventVerstka: JSX.Element[] = [];
-
-	if (currentEvent) {
-		eventVerstka = currentEvent.events.map(
-			(event: EventItem, index: number) => (
+	const eventVerstka = currentEvent
+		? currentEvent.events.map((event: EventItem, index: number) => (
 				<SwiperSlide key={index}>
 					<EventContainer>
 						<EventYear>{event.year}</EventYear>
 						<EventDescr>{event.description}</EventDescr>
 					</EventContainer>
 				</SwiperSlide>
-			)
-		);
-	}
+		  ))
+		: [];
 
 	return (
 		<EventsContainer className='events__container'>
@@ -104,6 +98,7 @@ const TimelineEvents = ({
 					<div className='custom-swiper-prev'></div>
 
 					<Swiper
+						pagination={{ clickable: true }}
 						slidesPerView={3.5}
 						spaceBetween={80}
 						navigation={{
@@ -113,24 +108,51 @@ const TimelineEvents = ({
 						breakpoints={{
 							1440: {
 								slidesPerView: 3.5,
+								spaceBetween: 80,
+								navigation: {
+									prevEl: ".custom-swiper-prev",
+									nextEl: ".custom-swiper-next",
+								},
+								pagination: {
+									clickable: false,
+								},
 							},
 							1040: {
 								slidesPerView: 2.5,
 								spaceBetween: 50,
+								navigation: {
+									prevEl: ".custom-swiper-prev",
+									nextEl: ".custom-swiper-next",
+								},
+								pagination: {
+									clickable: false,
+								},
 							},
 							768: {
 								slidesPerView: 2,
 								spaceBetween: 25,
+								navigation: {
+									prevEl: ".custom-swiper-prev",
+									nextEl: ".custom-swiper-next",
+								},
+								pagination: {
+									clickable: false,
+								},
 							},
-							420: {
+							320: {
 								slidesPerView: 1.5,
 								spaceBetween: 25,
+								navigation: false,
+								pagination: {
+									clickable: true,
+								},
 							},
 						}}
-						modules={[Navigation]}
+						modules={[Navigation, Pagination]}
 						className='mySwiper'>
 						{eventVerstka}
 					</Swiper>
+
 					<div className='custom-swiper-next'></div>
 				</div>
 			</FadeWrapper>

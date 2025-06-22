@@ -10,7 +10,8 @@ const TimelineNavigatorContainer = styled.div`
 	gap: 20px;
 	position: relative;
 	top: 36.5%;
-	left: 80px;
+	left: 0px;
+	margin-left: 80px;
 `;
 
 const NavigatorContainer = styled.div`

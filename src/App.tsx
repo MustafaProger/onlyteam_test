@@ -19,7 +19,7 @@ const AppContainer = styled.div`
 
 const App = () => {
 	return (
-		<AppContainer>
+		<AppContainer className='app'>
 			<TimelineContainer>
 				<TimelineTitle />
 				<TimelineCircle />
