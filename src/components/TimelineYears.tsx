@@ -12,6 +12,14 @@ const YearsContainer = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	gap: 90px;
+
+	@media (max-width: 1024px) {
+		top: 40%;
+	}
+
+	@media (max-width: 768px) {
+		width: calc(100% - 40px);
+	}
 `;
 
 const YearsItem = styled.h2`
@@ -25,6 +33,14 @@ const YearsItem = styled.h2`
 
 	&.years__item-right {
 		color: rgba(239, 93, 168, 1);
+	}
+
+	@media (max-width: 1440px) {
+		font-size: 140px;
+	}
+
+	@media (max-width: 1024px) {
+		font-size: 119px;
 	}
 `;
 

@@ -5,6 +5,33 @@ const TitleContaner = styled.div`
 	display: flex;
 	align-items: center;
 	padding-top: 170px;
+
+	@media (max-width: 1440px) {
+		padding-top: 40px;
+
+		.title__item {
+			font-size: 42px;
+		}
+
+		.title__line {
+			margin-right: 60px;
+		}
+	}
+
+	@media (max-width: 1024px) {
+		.title__line {
+			height: 100px;
+			margin-right: 50px;
+		}
+	}
+
+	@media (max-width: 768px) {
+		border: none;
+
+		.title__line {
+			display: none;
+		}
+	}
 `;
 
 const Line = styled.div`

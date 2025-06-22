@@ -15,6 +15,10 @@ const AppContainer = styled.div`
 	background: #f4f5f9;
 	overflow-y: auto;
 	padding: 0 10px;
+
+	@media (max-width: 768px) {
+		padding: 0;
+	}
 `;
 
 const App = () => {

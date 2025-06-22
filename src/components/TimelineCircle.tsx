@@ -15,6 +15,21 @@ const Circle = styled.div`
 	border: 1px solid #d9d9d9;
 	transition: all 1s;
 	z-index: 3;
+
+	@media (max-width: 1440px) {
+		width: 400px;
+		height: 400px;
+	}
+
+	@media (max-width: 1024px) {
+		width: 350px;
+		height: 350px;
+		top: 40%;
+	}
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 `;
 
 const Dot = styled.div`

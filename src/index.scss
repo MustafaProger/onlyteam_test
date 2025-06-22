@@ -7,8 +7,13 @@
 	font-style: normal;
 }
 
+/* Swiper стили */
 .swiper-wrapper {
 	margin-bottom: 30px;
+
+	@media (max-width: 768px) {
+		margin: 0;
+	}
 }
 
 .custom-swiper-prev,
@@ -91,160 +96,8 @@
 		margin: 0 auto;
 		text-align: center;
 	}
-}
-
-@media (max-width: 1440px) {
-	.sc-bRKDuR.container {
-		min-height: 700px;
-	}
-
-	.kgISHx.title__container {
-		padding-top: 40px;
-
-		.title__item {
-			font-size: 42px;
-		}
-
-		.title__line {
-			margin-right: 60px;
-		}
-	}
-
-	.eSSKxn.circle {
-		width: 400px;
-		height: 400px;
-	}
-
-	.jYWhnb.years__item {
-		font-size: 140px;
-	}
-
-	.bOakSB.navigator__container {
-		top: 40%;
-	}
-
-	.iQRfrY.events__container {
-		top: 47%;
-	}
-}
-
-@media (max-width: 1024px) {
-	.sc-bRKDuR.container {
-		&::before {
-			top: 40%;
-		}
-	}
-
-	.kgISHx.title__container {
-		.title__line {
-			height: 100px;
-			margin-right: 50px;
-		}
-	}
-
-	.eSSKxn.circle {
-		width: 350px;
-		height: 350px;
-		top: 40%;
-	}
-
-	.bRCLpk.years__container {
-		top: 40%;
-	}
-
-	.jYWhnb.years__item {
-		font-size: 119px;
-	}
-}
-
-@media (max-width: 768px) {
-	.vcwJW.app {
-		padding: 0;
-	}
-
-	.dKingg.container {
-		border: none;
-	}
-
-	.kgISHx.title__container {
-		border: none;
-
-		.title__line {
-			display: none;
-		}
-	}
-
-	.eSSKxn.circle {
-		display: none;
-	}
-
-	.sc-bRKDuR.container {
-		padding: 20px;
-		&::after,
-		&::before {
-			display: none;
-		}
-	}
-
-	.bRCLpk.years__container {
-		width: calc(100% - 40px);
-	}
-
-	.kjTBwX.navigator__container {
-		top: 80%;
-		padding-bottom: 13.3px;
-		margin-left: 0px;
-		gap: 10px;
-
-		.navigator-right {
-			left: 40%;
-		}
-	}
-
-	.iQRfrY.events__container {
-		left: 0;
-		top: 35%;
-		margin: 0;
-		&::before {
-			content: "";
-			position: absolute;
-			top: -20px;
-			left: 0;
-			width: 100%;
-			height: 1px;
-			background-color: #d9d9d9;
-		}
-	}
-
-	.swiper-wrapper {
-		margin: 0;
-	}
 
 	.swiper-slide-next {
 		opacity: 0.4;
 	}
 }
-
-// .kjTBwX.navigator__container {
-// 	height: 50px;
-// 	width: 60px;
-// 	top: 80%;
-// 	padding-bottom: 13.3px;
-// 	bottom: 0%;
-// 	margin-left: 0px;
-// 	gap: 10px;
-
-// 	.navigator {
-// 		width: 25px;
-// 		height: 25px;
-// 	}
-
-// 	.navigator span {
-// 		width: 7.5px;
-// 		height: 7.5px;
-// 	}
-
-// 	.navigator-right {
-// 		left: calc(20% + 8.3px);
-// 	}
-// }

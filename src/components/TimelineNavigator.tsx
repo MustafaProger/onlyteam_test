@@ -12,6 +12,21 @@ const TimelineNavigatorContainer = styled.div`
 	top: 36.5%;
 	left: 0px;
 	margin-left: 80px;
+
+	@media (max-width: 1440px) {
+		top: 40%;
+	}
+
+	@media (max-width: 768px) {
+		top: 80%;
+		padding-bottom: 13.3px;
+		margin-left: 0px;
+		gap: 10px;
+
+		.navigator-right {
+			left: 40%;
+		}
+	}
 `;
 
 const NavigatorContainer = styled.div`

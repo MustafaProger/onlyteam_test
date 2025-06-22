@@ -31,6 +31,26 @@ const Container = styled.div`
 		height: 100%;
 		background-color: #d9d9d9;
 	}
+
+	@media (max-width: 1440px) {
+		min-height: 700px;
+	}
+
+	@media (max-width: 1024px) {
+		&::before {
+			top: 40%;
+		}
+	}
+
+	@media (max-width: 768px) {
+		border: none;
+		padding: 20px;
+		
+		&::after,
+		&::before {
+			display: none;
+		}
+	}
 `;
 
 const TimelineContainer = ({ children }: PropsWithChildren<{}>) => {

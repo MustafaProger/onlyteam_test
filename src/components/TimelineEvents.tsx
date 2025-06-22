@@ -19,6 +19,27 @@ const EventsContainer = styled.div`
 	position: relative;
 	top: 42%;
 	left: 80px;
+
+	@media (max-width: 1440px) {
+		top: 47%;
+	}
+
+	@media (max-width: 768px) {
+		left: 0;
+		top: 35%;
+		margin: 0;
+		
+		&::before {
+			content: "";
+			position: absolute;
+			top: -20px;
+			left: 0;
+			width: 100%;
+			height: 1px;
+			background-color: #d9d9d9;
+		}
+	}
+
 `;
 
 const EventContainer = styled.div`
