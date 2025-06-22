@@ -7,7 +7,7 @@ const TitleContaner = styled.div`
 	padding-top: 170px;
 
 	@media (max-width: 1440px) {
-		padding-top: 40px;
+		padding-top: 39px;
 
 		.title__item {
 			font-size: 42px;
@@ -28,8 +28,18 @@ const TitleContaner = styled.div`
 	@media (max-width: 768px) {
 		border: none;
 
+		.title__item {
+			font-size: 36px;
+		}
+
 		.title__line {
 			display: none;
+		}
+	}
+
+	@media (max-width: 425px) {
+		.title__item {
+			font-size: 20px;
 		}
 	}
 `;

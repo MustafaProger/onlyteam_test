@@ -17,8 +17,13 @@ const YearsContainer = styled.div`
 		top: 40%;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: 425px) {
 		width: calc(100% - 40px);
+		gap: 0;
+	}
+
+	@media (max-width: 425px) {
+		top: 35%;
 	}
 `;
 
@@ -41,6 +46,14 @@ const YearsItem = styled.h2`
 
 	@media (max-width: 1024px) {
 		font-size: 119px;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 70px;
+	}
+
+	@media (max-width: 425px) {
+		font-size: 56px;
 	}
 `;
 

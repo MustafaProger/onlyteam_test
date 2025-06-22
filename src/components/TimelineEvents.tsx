@@ -15,20 +15,20 @@ import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 
 const EventsContainer = styled.div`
-	margin: 0px 160px 0px 0px;
 	position: relative;
 	top: 42%;
 	left: 80px;
+	margin: 0px 160px 0px 0px;
 
 	@media (max-width: 1440px) {
 		top: 47%;
 	}
 
 	@media (max-width: 768px) {
+		top: 22%;
 		left: 0;
-		top: 35%;
 		margin: 0;
-		
+
 		&::before {
 			content: "";
 			position: absolute;
@@ -39,7 +39,12 @@ const EventsContainer = styled.div`
 			background-color: #d9d9d9;
 		}
 	}
-
+	@media (max-width: 425px) {
+		.swiper-pagination-bullet {
+			width: 6px;
+			height: 6px;
+		}
+	}
 `;
 
 const EventContainer = styled.div`
@@ -52,12 +57,20 @@ const EventYear = styled.h4`
 	line-height: 120%;
 	font-size: 25px;
 	color: rgba(56, 119, 238, 1);
+	@media (max-width: 768px) {
+		font-size: 16px;
+	}
 `;
 
 const EventDescr = styled.p`
 	line-height: 30px;
 	font-size: 20px;
 	color: rgba(66, 86, 122, 1);
+
+	@media (max-width: 425px) {
+		font-size: 14px;
+		line-height: 145%;
+	}
 `;
 
 const FadeWrapper = styled.div<{ $visible: boolean }>`
@@ -163,6 +176,14 @@ const TimelineEvents = ({
 							320: {
 								slidesPerView: 1.5,
 								spaceBetween: 25,
+								navigation: false,
+								pagination: {
+									clickable: true,
+								},
+							},
+							0: {
+								slidesPerView: 1,
+								spaceBetween: 0,
 								navigation: false,
 								pagination: {
 									clickable: true,

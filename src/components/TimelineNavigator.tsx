@@ -18,14 +18,10 @@ const TimelineNavigatorContainer = styled.div`
 	}
 
 	@media (max-width: 768px) {
-		top: 80%;
+		top: 75%;
 		padding-bottom: 13.3px;
 		margin-left: 0px;
 		gap: 10px;
-
-		.navigator-right {
-			left: 40%;
-		}
 	}
 `;
 
@@ -84,6 +80,29 @@ const NavigatorContainer = styled.div`
 	.navigator-right span {
 		transform: translate(-75%, -50%) rotate(135deg);
 	}
+
+	@media (max-width: 768px) {
+		.navigator-right {
+			left: 40%;
+		}
+	}
+
+	@media (max-width: 425px) {
+		.navigator-right {
+			left: calc(15% + 8.5px);
+		}
+
+		.navigator {
+			width: 25px;
+			height: 25px;
+		}
+
+		.navigator span {
+			width: 5px;
+			height: 5px;
+
+		}
+	}
 `;
 
 const TimelineNavigator = ({
@@ -123,10 +142,8 @@ function mapDispatchToProps(
 	dispatch: Dispatch<AppAction>
 ): Pick<NavigatorProps, "goToNextDot" | "goToPreviousDot"> {
 	return {
-		goToPreviousDot: () =>
-			dispatch({ type: "GO_TO_PREVIOUS_DOT" }),
-		goToNextDot: () =>
-			dispatch({ type: "GO_TO_NEXT_DOT" }),
+		goToPreviousDot: () => dispatch({ type: "GO_TO_PREVIOUS_DOT" }),
+		goToNextDot: () => dispatch({ type: "GO_TO_NEXT_DOT" }),
 	};
 }
 
