@@ -9,18 +9,22 @@
 
 /* Swiper стили */
 .swiper-wrapper {
+	width: 100%;
 	margin-bottom: 30px;
-
 	@media (max-width: 768px) {
 		margin: 0;
 	}
 }
 
 .swiper-slide {
-	height: auto;
+	height: auto !important;
 	display: flex;
 	flex-direction: column;
-}
+	align-items: flex-start;
+	min-width: 0;
+	max-width: 320px;
+	width: 100%;
+  }
 
 .custom-swiper-prev,
 .custom-swiper-next {
@@ -77,9 +81,5 @@
 
 	.swiper-slide-next {
 		opacity: 0.4;
-	}
-
-	.mySwiper {
-		overflow: visible;
 	}
 }
