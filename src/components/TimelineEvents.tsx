@@ -12,7 +12,7 @@ const EventsContainer = styled.div`
 	position: relative;
 
 	@media (max-width: 768px) {
-		margin: 205px 0 0 0;
+		margin: 235px 0 0 0;
 
 		&::before {
 			content: "";
@@ -58,6 +58,17 @@ const FadeWrapper = styled.div<{ $visible: boolean }>`
 	transition: all 0.4s ease;
 `;
 
+const Category = styled.p`
+	position: absolute;
+	top: -50px;
+	left: 0;
+	transform: translateY(-50%);
+	font-size: 20px;
+	font-weight: bold;
+	color: rgba(66, 86, 122, 1);
+	transition: all 0.3s;
+`;
+
 const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 	const [visible, setVisible] = useState(true);
 	const [localDot, setLocalDot] = useState(activeDot);
@@ -76,23 +87,30 @@ const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 	}, [activeDot]);
 
 	const currentEvent = events[localDot - 1];
-	
-	console.log('TimelineEvents:', { activeDot, localDot, eventsLength: events.length, currentEvent });
-	
-	const eventVerstka = currentEvent && currentEvent.events
-		? currentEvent.events.map((event: EventItem, index: number) => (
-				<SwiperSlide key={index}>
-					<EventContainer>
-						<EventYear>{event.year}</EventYear>
-						<EventDescr>{event.description}</EventDescr>
-					</EventContainer>
-				</SwiperSlide>
-		  ))
-		: [];
+
+	console.log("TimelineEvents:", {
+		activeDot,
+		localDot,
+		eventsLength: events.length,
+		currentEvent,
+	});
+
+	const eventVerstka =
+		currentEvent && currentEvent.events
+			? currentEvent.events.map((event: EventItem, index: number) => (
+					<SwiperSlide key={index}>
+						<EventContainer>
+							<EventYear>{event.year}</EventYear>
+							<EventDescr>{event.description}</EventDescr>
+						</EventContainer>
+					</SwiperSlide>
+			  ))
+			: [];
 
 	return (
 		<EventsContainer className='events__container'>
 			<FadeWrapper $visible={visible}>
+				<Category>{events[localDot - 1].category}</Category>
 				<div
 					className='custom-swiper-wrapper'
 					style={{ position: "relative" }}>
