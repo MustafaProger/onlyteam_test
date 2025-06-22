@@ -61,6 +61,35 @@ const Container = styled.div`
 	}
 `;
 
+const PaginationContainer = styled.div`
+	position: absolute;
+	top: 105%;
+	left: 50%;
+	transform: translateX(-50%);
+	display: none;
+	gap: 10px;
+	z-index: 10;
+
+	@media (max-width: 768px) {
+		display: flex;
+		bottom: 20px;
+	}
+`;
+
+const PaginationDot = styled.div<{ $active: boolean }>`
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: ${({ $active }) =>
+		$active ? "rgba(66, 86, 122, 1)" : "rgba(66, 86, 122, 0.4)"};
+	cursor: pointer;
+	transition: all 0.3s ease;
+
+	&:hover {
+		background: rgba(66, 86, 122, 0.7);
+	}
+`;
+
 const TimelineContainer: React.FC<TimelineContainerProps> = ({ events }) => {
 	const [activeDot, setActiveDot] = useState(1);
 	const countDots = events.length;
@@ -79,6 +108,10 @@ const TimelineContainer: React.FC<TimelineContainerProps> = ({ events }) => {
 
 	const handleDotClick = (index: number) => {
 		setActiveDot(index);
+	};
+
+	const handlePaginationClick = (index: number) => {
+		setActiveDot(index + 1);
 	};
 
 	return (
@@ -104,6 +137,15 @@ const TimelineContainer: React.FC<TimelineContainerProps> = ({ events }) => {
 				activeDot={activeDot}
 				events={events}
 			/>
+			<PaginationContainer>
+				{Array.from({ length: countDots }).map((_, index) => (
+					<PaginationDot
+						key={index}
+						$active={activeDot === index + 1}
+						onClick={() => handlePaginationClick(index)}
+					/>
+				))}
+			</PaginationContainer>
 		</Container>
 	);
 };

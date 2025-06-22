@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styled from "styled-components";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import { TimelineEventsProps } from "../types/components";
 import { EventItem } from "../types/timeline";
 
@@ -23,12 +22,6 @@ const EventsContainer = styled.div`
 			width: 100%;
 			height: 2px;
 			background-color: #d9d9d9;
-		}
-	}
-	@media (max-width: 425px) {
-		.swiper-pagination-bullet {
-			width: 6px;
-			height: 6px;
 		}
 	}
 `;
@@ -68,18 +61,25 @@ const FadeWrapper = styled.div<{ $visible: boolean }>`
 const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 	const [visible, setVisible] = useState(true);
 	const [localDot, setLocalDot] = useState(activeDot);
+	const swiperRef = useRef<any>(null);
 
 	useEffect(() => {
 		setVisible(false);
 		const timer = setTimeout(() => {
 			setLocalDot(activeDot);
 			setVisible(true);
+			if (swiperRef.current && swiperRef.current.swiper) {
+				swiperRef.current.swiper.slideTo(0);
+			}
 		}, 1000);
 		return () => clearTimeout(timer);
 	}, [activeDot]);
 
 	const currentEvent = events[localDot - 1];
-	const eventVerstka = currentEvent
+	
+	console.log('TimelineEvents:', { activeDot, localDot, eventsLength: events.length, currentEvent });
+	
+	const eventVerstka = currentEvent && currentEvent.events
 		? currentEvent.events.map((event: EventItem, index: number) => (
 				<SwiperSlide key={index}>
 					<EventContainer>
@@ -99,7 +99,7 @@ const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 					<div className='custom-swiper-prev'></div>
 
 					<Swiper
-						pagination={{ clickable: true }}
+						ref={swiperRef}
 						slidesPerView={3.5}
 						spaceBetween={80}
 						navigation={{
@@ -114,9 +114,6 @@ const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 									prevEl: ".custom-swiper-prev",
 									nextEl: ".custom-swiper-next",
 								},
-								pagination: {
-									clickable: false,
-								},
 							},
 							1040: {
 								slidesPerView: 2.5,
@@ -124,9 +121,6 @@ const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 								navigation: {
 									prevEl: ".custom-swiper-prev",
 									nextEl: ".custom-swiper-next",
-								},
-								pagination: {
-									clickable: false,
 								},
 							},
 							768: {
@@ -136,28 +130,19 @@ const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 									prevEl: ".custom-swiper-prev",
 									nextEl: ".custom-swiper-next",
 								},
-								pagination: {
-									clickable: false,
-								},
 							},
 							320: {
 								slidesPerView: 1.5,
 								spaceBetween: 25,
 								navigation: false,
-								pagination: {
-									clickable: true,
-								},
 							},
 							0: {
 								slidesPerView: 1,
 								spaceBetween: 0,
 								navigation: false,
-								pagination: {
-									clickable: true,
-								},
 							},
 						}}
-						modules={[Navigation, Pagination]}
+						modules={[Navigation]}
 						className='mySwiper'>
 						{eventVerstka}
 					</Swiper>
