@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const TitleWrapper = styled.div`
+const TitleContaner = styled.div`
 	display: flex;
 	align-items: center;
 	padding-top: 170px;
@@ -21,16 +21,17 @@ const Title = styled.h1`
 	color: rgba(66, 86, 122, 1);
 	margin: 0;
 `;
+
 const TimelineTitle = () => {
 	return (
-		<TitleWrapper>
-			<Line />
-			<Title>
+		<TitleContaner className='title__container'>
+			<Line className='title__line' />
+			<Title className='title__item'>
 				Исторические
 				<br />
 				даты
 			</Title>
-		</TitleWrapper>
+		</TitleContaner>
 	);
 };
 

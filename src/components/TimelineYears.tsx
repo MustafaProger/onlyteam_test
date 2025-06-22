@@ -19,11 +19,11 @@ const YearsItem = styled.h2`
 	font-weight: bold;
 	transition: all 0.3s ease;
 
-	&.year-item-left {
+	&.years__item-left {
 		color: rgba(93, 95, 239, 1);
 	}
 
-	&.year-item-right {
+	&.years__item-right {
 		color: rgba(239, 93, 168, 1);
 	}
 `;
@@ -68,9 +68,13 @@ const TimelineYears = ({
 	}, [endYear]);
 
 	return (
-		<YearsContainer>
-			<YearsItem className='year-item-left'>{displayStartYear}</YearsItem>
-			<YearsItem className='year-item-right'>{displayEndYear}</YearsItem>
+		<YearsContainer className='years__container'>
+			<YearsItem className='years__item years__item-left'>
+				{displayStartYear}
+			</YearsItem>
+			<YearsItem className='years__item years__item-right'>
+				{displayEndYear}
+			</YearsItem>
 		</YearsContainer>
 	);
 };

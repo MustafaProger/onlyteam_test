@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { connect } from "react-redux";
 import { AppAction, AppState, DotsProps } from "../interfaces/interfaces";
 import styled from "styled-components";
@@ -97,6 +97,9 @@ const TimelineCircle = ({
 	const [visible, setVisible] = useState(false);
 	const [localDot, setLocalDot] = useState(activeDot);
 
+	const circleRef = useRef<HTMLDivElement>(null);
+	const [radius, setRadius] = useState(265);
+
 	useEffect(() => {
 		setVisible(false);
 
@@ -108,7 +111,21 @@ const TimelineCircle = ({
 		return () => clearTimeout(timer);
 	}, [activeDot]);
 
-	const radius = 265;
+	useEffect(() => {
+		const element = circleRef.current;
+		if (!element) return;
+
+		const observer = new ResizeObserver((entries) => {
+			const newWidth = entries[0].contentRect.width;
+			setRadius(newWidth / 2);
+		});
+
+		observer.observe(element);
+
+		setRadius(element.offsetWidth / 2);
+
+		return () => observer.disconnect();
+	}, []);
 
 	const stepAngle = 360 / countDots;
 	const rotationCircle = -activeDot * stepAngle;
@@ -122,7 +139,7 @@ const TimelineCircle = ({
 
 			return { x, y, index: i + 1 };
 		});
-	}, [countDots]);
+	}, [countDots, radius]);
 
 	let category: string = "";
 
@@ -132,6 +149,8 @@ const TimelineCircle = ({
 
 	return (
 		<Circle
+			ref={circleRef}
+			className='circle'
 			style={{
 				transform: `translate(-50%, -50%) rotate(${rotationCircle}deg)`,
 			}}>

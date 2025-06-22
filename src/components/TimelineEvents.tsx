@@ -15,7 +15,7 @@ import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
 
 const EventsContainer = styled.div`
-	margin: 56px 80px 0 80px;
+	margin: 56px 80px 40px 80px;
 `;
 
 const EventContainer = styled.div`
@@ -93,7 +93,7 @@ const TimelineEvents = ({
 	}
 
 	return (
-		<EventsContainer>
+		<EventsContainer className='events__container'>
 			<FadeWrapper $visible={visible}>
 				<div
 					className='custom-swiper-wrapper'
@@ -106,6 +106,21 @@ const TimelineEvents = ({
 						navigation={{
 							prevEl: ".custom-swiper-prev",
 							nextEl: ".custom-swiper-next",
+						}}
+						breakpoints={{
+							1440: {
+								slidesPerView: 3.5,
+							},
+							1040: {
+								slidesPerView: 2.5,
+								spaceBetween: 50,
+							},
+							640: {
+								slidesPerView: 2,
+							},
+							420: {
+								slidesPerView: 1.5,
+							},
 						}}
 						modules={[Navigation]}
 						className='mySwiper'>

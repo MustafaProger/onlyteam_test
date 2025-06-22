@@ -75,19 +75,19 @@ const TimelineNavigator = ({
 	goToNextDot,
 }: NavigatorProps) => {
 	return (
-		<TimelineNavigatorContainer>
+		<TimelineNavigatorContainer className='navigator__container'>
 			<p style={{ color: "#42567A", fontSize: "14px" }}>
 				0{activeDot}/0{countDots}
 			</p>
 			<NavigatorContainer>
 				<div
 					className='navigator navigator-left'
-					onClick={() => goToPreviousDot(activeDot)}>
+					onClick={() => goToPreviousDot()}>
 					<span></span>
 				</div>
 				<div
 					className='navigator navigator-right'
-					onClick={() => goToNextDot(activeDot)}>
+					onClick={() => goToNextDot()}>
 					<span></span>
 				</div>
 			</NavigatorContainer>
@@ -105,10 +105,10 @@ function mapDispatchToProps(
 	dispatch: Dispatch<AppAction>
 ): Pick<NavigatorProps, "goToNextDot" | "goToPreviousDot"> {
 	return {
-		goToPreviousDot: (index) =>
-			dispatch({ type: "GO_TO_PREVIOUS_DOT", payload: index }),
-		goToNextDot: (index) =>
-			dispatch({ type: "GO_TO_NEXT_DOT", payload: index }),
+		goToPreviousDot: () =>
+			dispatch({ type: "GO_TO_PREVIOUS_DOT" }),
+		goToNextDot: () =>
+			dispatch({ type: "GO_TO_NEXT_DOT" }),
 	};
 }
 
