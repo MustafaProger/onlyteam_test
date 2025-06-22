@@ -32,12 +32,13 @@ const App = () => {
 
 	return (
 		<AppContainer className='app'>
-			<TimelineContainer 
+			{/* <TimelineContainer 
 				events={events.slice(0, 3)} 
 			/>
-			{/* <TimelineContainer 
-				events={events} 
+			<TimelineContainer 
+				events={events.slice(3, 6)} 
 			/> */}
+			<TimelineContainer events={events} />
 		</AppContainer>
 	);
 };

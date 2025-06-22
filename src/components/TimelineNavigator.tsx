@@ -1,7 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
-import { Dispatch } from "redux";
 import { TimelineNavigatorProps } from "../types/components";
 
 const TimelineNavigatorContainer = styled.div`
