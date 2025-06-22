@@ -1,8 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import { connect } from "react-redux";
-import { AppAction, AppState, DotsProps } from "../interfaces/interfaces";
 import styled from "styled-components";
-import { Dispatch } from "redux";
+import { TimelineCircleProps } from "../types/components";
 
 const Circle = styled.div`
 	position: absolute;
@@ -107,8 +105,8 @@ const TimelineCircle = ({
 	countDots,
 	activeDot,
 	events,
-	setActiveDot,
-}: DotsProps) => {
+	onDotClick,
+}: TimelineCircleProps) => {
 	const [visible, setVisible] = useState(false);
 	const [localDot, setLocalDot] = useState(activeDot);
 
@@ -181,7 +179,7 @@ const TimelineCircle = ({
 						)}deg)`,
 					}}
 					className={activeDot === dot.index ? "active" : ""}
-					onClick={() => setActiveDot(dot.index)}>
+					onClick={() => onDotClick(dot.index)}>
 					<Category $visible={visible}>
 						{localDot === dot.index ? category : null}
 					</Category>
@@ -191,23 +189,4 @@ const TimelineCircle = ({
 	);
 };
 
-function mapStateToProps(
-	state: AppState
-): Pick<DotsProps, "activeDot" | "countDots" | "events"> {
-	return {
-		countDots: state.countDots,
-		activeDot: state.activeDot,
-		events: state.events,
-	};
-}
-
-function mapDispatchToProps(
-	dispatch: Dispatch<AppAction>
-): Pick<DotsProps, "setActiveDot"> {
-	return {
-		setActiveDot: (index) =>
-			dispatch({ type: "SET_ACTIVE_DOT", payload: index }),
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimelineCircle);
+export default TimelineCircle;

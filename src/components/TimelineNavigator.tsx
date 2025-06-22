@@ -1,26 +1,21 @@
 import React from "react";
-import { AppAction, AppState, NavigatorProps } from "../interfaces/interfaces";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Dispatch } from "redux";
+import { TimelineNavigatorProps } from "../types/components";
 
 const TimelineNavigatorContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	position: relative;
-	top: 36.5%;
-	left: 0px;
-	margin-left: 80px;
-
-	@media (max-width: 1440px) {
-		top: 40%;
-	}
+	margin: 393px 0 56px 80px;
 
 	@media (max-width: 768px) {
-		top: 75%;
+		position: absolute;
+		top: 100%;
+		left: 20px;
+		margin: 0;
 		padding-bottom: 13.3px;
-		margin-left: 0px;
 		gap: 10px;
 	}
 `;
@@ -100,7 +95,6 @@ const NavigatorContainer = styled.div`
 		.navigator span {
 			width: 5px;
 			height: 5px;
-
 		}
 	}
 `;
@@ -108,9 +102,9 @@ const NavigatorContainer = styled.div`
 const TimelineNavigator = ({
 	countDots,
 	activeDot,
-	goToPreviousDot,
-	goToNextDot,
-}: NavigatorProps) => {
+	onPrevious,
+	onNext,
+}: TimelineNavigatorProps) => {
 	return (
 		<TimelineNavigatorContainer className='navigator__container'>
 			<p style={{ color: "#42567A", fontSize: "14px" }}>
@@ -119,12 +113,12 @@ const TimelineNavigator = ({
 			<NavigatorContainer>
 				<div
 					className='navigator navigator-left'
-					onClick={() => goToPreviousDot()}>
+					onClick={() => onPrevious()}>
 					<span></span>
 				</div>
 				<div
 					className='navigator navigator-right'
-					onClick={() => goToNextDot()}>
+					onClick={() => onNext()}>
 					<span></span>
 				</div>
 			</NavigatorContainer>
@@ -132,19 +126,4 @@ const TimelineNavigator = ({
 	);
 };
 
-function mapStateToProps(
-	state: AppState
-): Pick<NavigatorProps, "activeDot" | "countDots"> {
-	return { countDots: state.countDots, activeDot: state.activeDot };
-}
-
-function mapDispatchToProps(
-	dispatch: Dispatch<AppAction>
-): Pick<NavigatorProps, "goToNextDot" | "goToPreviousDot"> {
-	return {
-		goToPreviousDot: () => dispatch({ type: "GO_TO_PREVIOUS_DOT" }),
-		goToNextDot: () => dispatch({ type: "GO_TO_NEXT_DOT" }),
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimelineNavigator);
+export default TimelineNavigator;

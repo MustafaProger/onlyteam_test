@@ -2,32 +2,20 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import { Dispatch } from "redux";
-import {
-	AppAction,
-	AppState,
-	EventItem,
-	EventsProps,
-} from "../interfaces/interfaces";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
+import { TimelineEventsProps } from "../types/components";
+import { EventItem } from "../types/timeline";
 
 const EventsContainer = styled.div`
+	margin: 0px 80px;
 	position: relative;
-	top: 42%;
-	left: 80px;
-	margin: 0px 160px 0px 0px;
-
-	@media (max-width: 1440px) {
-		top: 47%;
-	}
 
 	@media (max-width: 768px) {
-		top: 22%;
-		left: 0;
-		margin: 0;
+		margin: 205px 0 0 0;
 
 		&::before {
 			content: "";
@@ -35,7 +23,7 @@ const EventsContainer = styled.div`
 			top: -20px;
 			left: 0;
 			width: 100%;
-			height: 1px;
+			height: 2px;
 			background-color: #d9d9d9;
 		}
 	}
@@ -79,11 +67,7 @@ const FadeWrapper = styled.div<{ $visible: boolean }>`
 	transition: all 0.4s ease;
 `;
 
-const TimelineEvents = ({
-	activeDot,
-	events,
-	pushEventsToState,
-}: EventsProps) => {
+const TimelineEvents = ({ activeDot, events }: TimelineEventsProps) => {
 	const [visible, setVisible] = useState(true);
 	const [localDot, setLocalDot] = useState(activeDot);
 
@@ -95,21 +79,6 @@ const TimelineEvents = ({
 		}, 1000);
 		return () => clearTimeout(timer);
 	}, [activeDot]);
-
-	useEffect(() => {
-		async function fetchData() {
-			try {
-				const response = await fetch("/data/events.json");
-				if (!response.ok)
-					throw new Error(`HTTP error! status: ${response.status}`);
-				const data = await response.json();
-				pushEventsToState(data);
-			} catch (error) {
-				console.error("Ошибка загрузки данных:", error);
-			}
-		}
-		fetchData();
-	}, [pushEventsToState]);
 
 	const currentEvent = events[localDot - 1];
 	const eventVerstka = currentEvent
@@ -202,18 +171,4 @@ const TimelineEvents = ({
 	);
 };
 
-const mapStateToProps = (
-	state: AppState
-): Pick<EventsProps, "activeDot" | "events"> => ({
-	activeDot: state.activeDot,
-	events: state.events,
-});
-
-const mapDispatchToProps = (
-	dispatch: Dispatch<AppAction>
-): Pick<EventsProps, "pushEventsToState"> => ({
-	pushEventsToState: (events) =>
-		dispatch({ type: "PUSH_EVENTS", payload: events }),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TimelineEvents);
+export default TimelineEvents;

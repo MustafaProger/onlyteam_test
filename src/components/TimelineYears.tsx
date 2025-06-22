@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { AppState } from "../interfaces/interfaces";
 import { connect } from "react-redux";
+import { TimelineYearsProps } from "../types/components";
 
 const YearsContainer = styled.div`
 	position: absolute;
@@ -20,10 +20,6 @@ const YearsContainer = styled.div`
 	@media (max-width: 425px) {
 		width: calc(100% - 40px);
 		gap: 0;
-	}
-
-	@media (max-width: 425px) {
-		top: 35%;
 	}
 `;
 
@@ -58,12 +54,9 @@ const YearsItem = styled.h2`
 `;
 
 const TimelineYears = ({
-	activeDot,
-	events,
-}: Pick<AppState, "activeDot" | "events">) => {
-	const startYear = events[activeDot - 1]?.startYear ?? 0;
-	const endYear = events[activeDot - 1]?.endYear ?? 0;
-
+	startYear,
+	endYear,
+}: TimelineYearsProps) => {
 	const [displayStartYear, setDisplayStartYear] = useState(startYear);
 	const [displayEndYear, setDisplayEndYear] = useState(endYear);
 
@@ -108,11 +101,4 @@ const TimelineYears = ({
 	);
 };
 
-const mapStateToProps = (
-	state: AppState
-): Pick<AppState, "activeDot" | "events"> => ({
-	activeDot: state.activeDot,
-	events: state.events,
-});
-
-export default connect(mapStateToProps)(TimelineYears);
+export default TimelineYears;

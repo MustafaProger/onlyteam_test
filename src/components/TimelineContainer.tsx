@@ -1,5 +1,12 @@
-import React, { PropsWithChildren } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import TimelineTitle from "./TimelineTitle";
+import TimelineCircle from "./TimelineCircle";
+import TimelineYears from "./TimelineYears";
+import TimelineNavigator from "./TimelineNavigator";
+import TimelineEvents from "./TimelineEvents";
+import { Event } from "../types/timeline";
+import { TimelineContainerProps } from "../types/components";
 
 const Container = styled.div`
 	position: relative;
@@ -54,8 +61,51 @@ const Container = styled.div`
 	}
 `;
 
-const TimelineContainer = ({ children }: PropsWithChildren<{}>) => {
-	return <Container className='container'>{children}</Container>;
+const TimelineContainer: React.FC<TimelineContainerProps> = ({ events }) => {
+	const [activeDot, setActiveDot] = useState(1);
+	const countDots = events.length;
+
+	const currentEvent = events[activeDot - 1];
+	const startYear = currentEvent?.startYear ?? 0;
+	const endYear = currentEvent?.endYear ?? 0;
+
+	const handlePrevious = () => {
+		setActiveDot((prev) => (prev > 1 ? prev - 1 : countDots));
+	};
+
+	const handleNext = () => {
+		setActiveDot((prev) => (prev < countDots ? prev + 1 : 1));
+	};
+
+	const handleDotClick = (index: number) => {
+		setActiveDot(index);
+	};
+
+	return (
+		<Container className='container'>
+			<TimelineTitle />
+			<TimelineCircle
+				countDots={countDots}
+				activeDot={activeDot}
+				events={events}
+				onDotClick={handleDotClick}
+			/>
+			<TimelineYears
+				startYear={startYear}
+				endYear={endYear}
+			/>
+			<TimelineNavigator
+				countDots={countDots}
+				activeDot={activeDot}
+				onPrevious={handlePrevious}
+				onNext={handleNext}
+			/>
+			<TimelineEvents
+				activeDot={activeDot}
+				events={events}
+			/>
+		</Container>
+	);
 };
 
 export default TimelineContainer;
